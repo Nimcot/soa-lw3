@@ -1,0 +1,142 @@
+body {
+    overflow-x: hidden;
+    min-height: 100vh;
+    margin: 0;
+    background: #1c1b1b;
+    font: 18px monospace;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    padding: 0 10%;
+    --theme-color: #607db4
+}
+
+#file-picker {
+    width: 90%;
+    min-width: 348px;
+    max-width: 630px;
+    height: 54px;
+    margin: 0 15px 10px 10px;
+    border-radius: 20px;
+    background: #252526;
+}
+
+#file-picker:hover {
+    background: #2e2e2f;
+    transition: 0.8s;
+}
+
+.picker-btn {
+    padding: 15px 20px;
+    border: 1px solid #64758f;
+    border-radius: 10px;
+    background: var(--theme-color);
+    color: #506994;
+    font-size: large;
+    font-weight: bold;
+    transition: 0.4s;
+}
+
+#file {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #4b6391;
+    opacity: 0;
+    z-index: 1;
+    cursor: pointer;
+}
+
+#file + .picker-btn {
+    position: relative;
+    top: -54px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.picker-btn:hover, #file:hover + .picker-btn {
+    background: #3e4f6e;
+    color: #a9bdd7;
+    cursor: pointer;
+}
+
+#file-name {
+    overflow: hidden !important;
+    display: block;
+    position: relative;
+    top: -90px;
+    left: 130px;
+    width: 60%;
+    color: #676464;
+    white-space: nowrap;
+}
+
+#files-list {
+    width: fit-content;
+    margin: auto;
+    padding: 15px 10%;
+    list-style: none;
+    --theme-color: #607db4;
+}
+
+#files-list li {
+    margin: 5px 0;
+    padding: 3px 29px;
+    border-left: 1px solid var(--theme-color);
+    cursor: default;
+    line-height: 140%;
+    transition: 0.25s;
+}
+
+#files-list li:hover {
+    padding-left: 45px;
+    padding-right: 13px;
+    background: var(--theme-color)
+}
+
+#files-list li * { transition: 0.25s }
+
+#files-list li:hover * { color: #fff !important }
+
+#files-list li:hover a:not(:hover) { background: #7896d2 }
+
+#files-list li:hover a:not(:hover) u{ color: #c5c8e5 !important }
+
+#files-list i {
+    font-size: 17px;
+    color: #676464
+}
+
+#files-list b {
+    font-size: 15px;
+    color: #9a9a9a
+}
+
+#files-list p {
+    margin: 4px 0 7px 2px;
+    color: #8d8d8d;
+}
+
+#files-list a {
+    padding: 8px 15px;
+    background: var(--theme-color);
+    line-height: 50px;
+    font-weight: bold;
+    color: #fce4ec;
+    transition: 0.45s;
+}
+
+#files-list a:hover {
+    background: #4b6391 !important;
+    cursor: pointer;
+}

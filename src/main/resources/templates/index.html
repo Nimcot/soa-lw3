@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LW3</title>
+    <link rel="icon" th:href="@{/img/favicon.ico}">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<form id="picker-form" method="post" action="/" enctype="multipart/form-data" onsubmit="return false">
+    <div id="file-picker">
+        <input id="file" type="file" name="file" accept="application/msword,
+                application/vnd.openxmlformats-officedocument.wordprocessingml.document,
+                application/vnd.ms-powerpoint, application/vnd.openxmlformats-officedocument.presentationml.slideshow,
+                application/vnd.openxmlformats-officedocument.presentationml.presentation, application/vnd.ms-excel,
+                 application/vnd.ms-powerpoint, text/plain, application/pdf, image/*" required/>
+        <button class="picker-btn">Browse</button>
+        <span id="file-name">Select file..</span>
+    </div>
+    <div><button type="submit" class="picker-btn">Upload file</button></div>
+</form>
+<ul id="files-list">
+    <li th:each="file : ${files}">
+        <p>[[${file.name}]]</p>
+        <b>Modified at:</b> <i>[[${file.editDate}]]</i> <b>[[${file.editTime}]]</b>
+        <br>
+        <b>Created at:&nbsp;</b> <i>[[${file.creationDate}]]</i> <b>[[${file.creationTime}]]</b>
+        <br>
+        <a th:href="@{/files/{name}(name=${file.name})}"><u>↓</u></a> <b style="color: #d394c4">[[${file.size}]]</b>
+    </li>
+</ul>
+</body>
+<script>
+    document.getElementById('file').onchange = function(e) {
+        let file = e.target.value;
+        document.getElementById('picker-form').onsubmit = () => true;
+        document.getElementById('file-name').innerHTML = file.substring(file.lastIndexOf('\\') + 1, file.length);
+    };
+</script>
+</html>
