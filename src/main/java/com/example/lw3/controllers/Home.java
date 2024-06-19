@@ -1,24 +1,24 @@
 package com.example.lw3.controllers;
 
-import com.azure.storage.common.ParallelTransferOptions;
-import com.azure.storage.file.share.models.ShareFileUploadOptions;
 import com.example.lw3.Lw3ApplicationConfig;
 import com.example.lw3.dto.FileInfo;
 
+import java.util.*;
+import java.text.SimpleDateFormat;
 import java.io.BufferedInputStream;
-import java.io.FileInputStream;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.text.SimpleDateFormat;
-import java.util.*;
 
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.http.MediaTypeFactory;
-import org.springframework.stereotype.Controller;
+
 import org.springframework.ui.Model;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import com.azure.storage.file.share.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.http.MediaTypeFactory;
+
+import com.azure.storage.file.share.*;
+import com.azure.storage.common.ParallelTransferOptions;
 
 
 @Controller
@@ -98,7 +98,7 @@ public class Home {
     try(var inputStream = new BufferedInputStream(file.getInputStream())) {
       fileClient = dir.getFileClient(file.getOriginalFilename());
       fileClient.create(file.getSize());
-      fileClient.upload(inputStream, file.getSize());
+      fileClient.upload(inputStream, file.getSize(), new ParallelTransferOptions(3145728, 10, null, 3145728));
     } catch (Exception ignored) {
       if (fileClient != null && fileClient.exists())
         fileClient.delete();
